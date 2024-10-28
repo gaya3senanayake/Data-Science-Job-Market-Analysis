@@ -1,0 +1,27 @@
+[skills_keywords]
+Python, R, SAS, SPSS, Matlab, Scala, C#, Java, C++, C, Bash, Power BI, Tensorflow, pyspark, YOLO, Word, Excel, Access, Powerpoint, Tableu, D3, Qlik, KNIME, Spotfire, Julia
+
+[database_keywords]
+Data Management, Data Governance, ETL, NoSQL, Data Analysis, Data Pipelines, Distributed Database Management, Data Center, Relational Database, Data Loss Prevention, Data Quality, Database Technology, Data Product Development, Data Architecture, Metadata Management, Data Warehouse, Data Science, Cloud Database, SQL, Database Importing, Big Data, Data Modeling, Data Integration, Data Security, Data Manipulation, Data Compliance, Data Storage, Data Engineering, Data Migration, Graph Database, Clinical Data Management, Data Querying, Data Validation, Database Technologies, Data Pipeline, Data Warehousing, Data Processing, Data Transformation, Data Platform, Data Visualization, Data Analytics, Data Infrastructure, Data Processing Pipeline, Cloud Database Technologies, Data Protection, Database Query Optimization, Data Architecture Patterns, Data Aggregation, Database Software, Data Center Management, Data Architecture Implementation, Data Privacy, Database Administration, Data Center Services, Data Catalog, Data Science Tools, Database Metrics, Data Lake, Data Lifecycle, Database UAT, Data Warehouse Modeling, Data Engineering, Dataflow, Data Mining, Cloud-hosted Database Systems, Query Optimization, Data Extraction, Data Cleansing, Neo4j, Amazon Neptune, HDFS, Google BigQuery, AWS RDS, Microsoft Azure SQL Database, Data Governance, Data Versioning, Databricks, Data Indexing, OLAP, Data Access Control, Database Sharding, Data Archival, Apache Kafka, Apache Flink, Apache Parquet, SQLAlchemy, Django ORM
+
+[data_engineering_words]
+ETL, data pipelines, data wrangling, data cleaning, Apache Airflow, data ingestion, Kafka, Spark, Hadoop, Data Engineering, Data Warehousing, Data Modeling, Data Architecture, Data Quality, Data Validation, Data Cleansing, Azure SQL Data Warehouse, Data Lakes, Databricks, Azure Data Factory Pipelines, Cloud-Based Data Platforms, ETL/ELT, Data Extraction, Data Classification, Data Mining, Relational Databases, Dimensional Databases, Distributed Data Tools (MapReduce, Hadoop, Hive, EMR, Kafka, Spark), Realtime Data, Data Profiling, NoSQL Databases, DataOps, Data Governance, Data Security, Data Lineage, Data Visualization, Data Pipelines Frameworks, Data API's, Data Flow, Data Warehousing (Redshift, Snowflake), Big Data Technologies, Data Processing Technologies (Apache Spark, Kafka), ETL Pipelines, Data Transformation, Data Integration, Data Migration, Data Lakehouse Architecture.
+
+[cloud_computing_words]
+AWS, EC2, S3, Lambda, Redshift, Glue, DynamoDB, CloudFormation, RDS, SageMaker, Microsoft Azure, Azure Functions, Azure DevOps, Azure Synapse, Azure Blob, Azure AI Services, Azure Kubernetes Service (AKS), Google Cloud Platform, BigQuery, Pub/Sub, Cloud Spanner, Google Cloud Run, Google AI, Cloud SQL, Kubernetes, Docker, Terraform, CloudFormation, Azure Resource Manager, Azure Synapse, AzureML, Azure Blob Storage, AWS S3
+
+[soft_skills_word]
+communication, teamwork, collaboration, problem-solving, adaptability, critical thinking, creativity, leadership, time management, empathy, conflict resolution, work ethic, interpersonal skills, flexibility, decision making, attention to detail, collaboration skills, technical communication, interpersonal communication, adaptability to new technologies, effective prioritization, multitasking, analytical skills, organizational skills, strategic leadership, written communication, verbal communication, customer empathy, stakeholder management, client communication, open collaboration, teamwork spirit, communication protocols, influence management, negotiation skills
+
+
+[company_keywords_startup]
+startup, fast-growing, scaling, seed funding, series a, series b, venture capital, angel investors, small team, equity, disrupt, wear many hats, innovative, early-stage, nimble, dynamic environment, high-growth, bootstrapped
+
+[company_keywords_medium]
+mid-sized, medium, growing, regional, multiple locations, offices in multiple cities, 50-500 employees, structured, room for growth, expansion, established processes, career development, scalable, dynamic team, career advancement, family-run, national presence, sector leader
+
+[company_keywords_large]
+large, global, corporation, over, market leader, multi-billion, 10,000 employees, well-established, multinational, enterprise, compliance, regulations, ISO certified, structured processes, industry standards, hierarchical, corporate culture, formal work culture, benefits package, 401(k), diverse workforce, global reach, publicly traded, shareholder
+
+[tokens]
+Scientist, Engineer, Thesis worker, Researcher, Data Steward, Consultant, Analyst, manager, modeler, Specialist, Developer, Officer, Product Owner, Architect, Ethicist, Internship
