@@ -18,7 +18,7 @@ This project is a **data-driven job recommendation system** that helps data scie
 ## **Tech Stack**  
 
 - **Python** – Data processing, NLP, and model building  
-- **BeautifulSoup & Selenium** – Web scraping from LinkedIn  
+- **Apify Web Scrapper** – Web scraping from LinkedIn  
 - **Pandas & NumPy** – Data cleaning and analysis  
 - **Scikit-learn & NLP Techniques** – Job matching using **TF-IDF vectorization & cosine similarity**  
 - **Streamlit** – Interactive UI for job visualization and recommendations  
