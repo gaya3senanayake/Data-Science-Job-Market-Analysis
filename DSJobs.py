@@ -1570,15 +1570,16 @@ with tab3:
                     ################ Updated Missing Skills by Sector ################
                     # Suggest missing skills classified by sector
                     missing_skills_by_sector = {}
+                    cv_skills_set = {skill.lower().strip() for skill in cv_skills_set}
 
                     for index, row in top_10_jobs.iterrows():
                         # Extract the required skills and categorize them
                         job_sector = row['sector']
 
-                        required_skills = row['required skills'].split(', ')
-                        data_engineering_skills = row['Data Engineering'].split(', ')
-                        cloud_computing_skills = row['Cloud Computing'].split(', ')
-                        soft_skills = row['Soft Skills'].split(', ')
+                        required_skills = {skill.lower().strip() for skill in row['required skills'].split(',')}
+                        data_engineering_skills = {skill.lower().strip() for skill in row['Data Engineering'].split(',')}
+                        cloud_computing_skills = {skill.lower().strip() for skill in row['Cloud Computing'].split(',')}
+                        soft_skills = {skill.lower().strip() for skill in row['Soft Skills'].split(',')}
 
                         # Initialize sector in the dictionary if not present
                         if job_sector not in missing_skills_by_sector:
@@ -1590,10 +1591,11 @@ with tab3:
                             }
 
                         # Calculate missing skills for each job
-                        required_missing = set(required_skills) - cv_skills_set
-                        data_eng_missing = set(data_engineering_skills) - cv_skills_set
-                        cloud_comp_missing = set(cloud_computing_skills) - cv_skills_set
-                        soft_skills_missing = set(soft_skills) - cv_skills_set
+                        required_missing = required_skills - cv_skills_set
+                        data_eng_missing = data_engineering_skills - cv_skills_set
+                        cloud_comp_missing = cloud_computing_skills - cv_skills_set
+                        soft_skills_missing = soft_skills - cv_skills_set
+
 
                         # Add missing skills to the corresponding sector category
                         missing_skills_by_sector[job_sector]['Required Skills'].update(required_missing)
