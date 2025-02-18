@@ -1724,13 +1724,13 @@ with tab3:
             all_sectors.append("All Sectors")
 
             # Sector filter (drop-down menu)
-            selected_sector = st.selectbox("Select Sector to View Missing Skills:", all_sectors)
+            selected_sector = st.selectbox("Select Sector to View Required Skills:", all_sectors)
 
             # Display missing skills immediately upon sector selection
             if selected_sector != "All Sectors":
-                st.subheader(f"Missing Skills for Sector: {selected_sector}")
+                st.subheader(f"Skills for Sector: {selected_sector}")
 
-                # Display missing skills for each category
+                # Display skills for each category
                 for skill_type in ['Required Skills', 'Data Engineering', 'Cloud Computing', 'Soft Skills']:
                     skills = missing_skills_by_sector[selected_sector][skill_type]
                     with st.expander(skill_type, expanded=True):  # Set expanded to True
@@ -1740,7 +1740,7 @@ with tab3:
                             st.write(f"All required {skill_type.lower()} are present.")
 
             else:
-                st.write("### Common Skills Across All Sectors")
+                st.write("### Required Skills Across All Sectors")
 
                 # Initialize sets to store common skills
                 common_skills = {
@@ -1768,7 +1768,7 @@ with tab3:
                 st.download_button(
                     label="Download Missing Skills File",
                     data=file.read(),
-                    file_name="missing_skills_output.txt",
+                    file_name="Required_skills_output.txt",
                     mime="text/plain"
                 )
 
