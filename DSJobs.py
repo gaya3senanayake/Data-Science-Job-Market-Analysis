@@ -1723,7 +1723,7 @@ with tab3:
             all_sectors.append("All Sectors")
 
             # Sector filter (drop-down menu)
-            selected_sector = st.selectbox("Select Sector to View Missing Skills:", all_sectors)
+            selected_sector = st.selectbox("Select Sector to View Required Skills:", all_sectors)
 
             # Display missing skills immediately upon sector selection
             if selected_sector != "All Sectors":
