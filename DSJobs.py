@@ -1429,7 +1429,7 @@ with tab3:
             # Dropdown for Language Skills
             st.write("### Language Skills")
             language_skills = ["English", "Finnish", "Spanish", "German"]
-            language_skill = st.multiselect("Language Skills", language_skills)
+            language_skills = st.multiselect("Language Skills", language_skills)
 
             # Text Input for Project Experience
             st.write("### Project Experience (200 words max)")
@@ -1469,7 +1469,7 @@ with tab3:
                     "database": ', '.join(database),
                     "data_engineering": ', '.join(data_engineering),
                     "cloud_computing": ', '.join(cloud_computing),
-                    "language_skills": ', '.join(language_skill),
+                    "language_skills": ', '.join(language_skills),
                     "soft_skills": ', '.join(selected_soft_skills),
                     "experience_level": experience_level,
                     "education_level": education_level,
@@ -1513,7 +1513,7 @@ with tab3:
                     'data_engineering': input_df['data_engineering'][0],
                     'cloud_computing': input_df['cloud_computing'][0],
                     'education_level': input_df['education_level'][0],
-                    'language_skills': input_df['language_skill'][0]
+                    'language_skills': input_df['language_skills'][0]
                 }
 
                 # Processing logic for CV input
