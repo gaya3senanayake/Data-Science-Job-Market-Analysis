@@ -1465,22 +1465,22 @@ with tab3:
             else:
                 user_input = {
                     "project_experience": project_experience,
-                    "soft_skills": ', '.join(selected_soft_skills),
-                    "experience_level": experience_level,
-                    "work_arrangement": ', '.join(work_arrangement),
-                    "work_sector": ', '.join(work_sector),
-                    "work_type": ', '.join(work_type),
-                    "contract_type": ', '.join(contract_type),
-                    "company_level": ', '.join(company_level),
                     "programming_lang": ', '.join(programming_lang),
                     "database": ', '.join(database),
                     "data_engineering": ', '.join(data_engineering),
                     "cloud_computing": ', '.join(cloud_computing),
-                    "education_level": ', '.join(education_level),
-                    "language_skills": ', '.join(language_skill)
+                    "language_skills": ', '.join(language_skill),
+                    "soft_skills": ', '.join(selected_soft_skills),
+                    "experience_level": experience_level,
+                    "education_level": education_level,
+                    "work_arrangement": ', '.join(work_arrangement),
+                    "work_sector": ', '.join(work_sector),
+                    "work_type": ', '.join(work_type),
+                    "contract_type": ', '.join(contract_type),
+                    "company_level": ', '.join(company_level)
                 }
                 # Save input to a CSV file
-                input_df = pd.DataFrame([user_input])
+                input_df = pd.DataFrame([input_file_path])
                 input_df.to_csv(input_file_path, index=False)
                 st.success("Preferences saved successfully!")
 
@@ -1499,6 +1499,7 @@ with tab3:
 
                 # Read the input file to use as cv_input
                 input_df = pd.read_csv(input_file_path)
+                
                 cv_input = {
                     'project_description': input_df['project_experience'][0],
                     'soft_skills': input_df['soft_skills'][0],
@@ -1570,16 +1571,15 @@ with tab3:
                     ################ Updated Missing Skills by Sector ################
                     # Suggest missing skills classified by sector
                     missing_skills_by_sector = {}
-                    cv_skills_set = {skill.lower().strip() for skill in cv_skills_set.split(',')}
 
                     for index, row in top_10_jobs.iterrows():
                         # Extract the required skills and categorize them
                         job_sector = row['sector']
 
-                        required_skills = {skill.lower().strip() for skill in row['required skills'].split(',')}
-                        data_engineering_skills = {skill.lower().strip() for skill in row['Data Engineering'].split(',')}
-                        cloud_computing_skills = {skill.lower().strip() for skill in row['Cloud Computing'].split(',')}
-                        soft_skills = {skill.lower().strip() for skill in row['Soft Skills'].split(',')}
+                        required_skills = row['required skills'].split(', ')
+                        data_engineering_skills = row['Data Engineering'].split(', ')
+                        cloud_computing_skills = row['Cloud Computing'].split(', ')
+                        soft_skills = row['Soft Skills'].split(', ')
 
                         # Initialize sector in the dictionary if not present
                         if job_sector not in missing_skills_by_sector:
@@ -1591,11 +1591,10 @@ with tab3:
                             }
 
                         # Calculate missing skills for each job
-                        required_missing = required_skills - cv_skills_set
-                        data_eng_missing = data_engineering_skills - cv_skills_set
-                        cloud_comp_missing = cloud_computing_skills - cv_skills_set
-                        soft_skills_missing = soft_skills - cv_skills_set
-
+                        required_missing = set(required_skills) - cv_skills_set
+                        data_eng_missing = set(data_engineering_skills) - cv_skills_set
+                        cloud_comp_missing = set(cloud_computing_skills) - cv_skills_set
+                        soft_skills_missing = set(soft_skills) - cv_skills_set
 
                         # Add missing skills to the corresponding sector category
                         missing_skills_by_sector[job_sector]['Required Skills'].update(required_missing)
@@ -1681,53 +1680,106 @@ with tab3:
 
         ################### Missing Skills Output Section ######################
 
-        # Ensure cv_skills_set is a set with normalized skills
-        cv_skills_set = {skill.lower().strip() for skill in cv_skills_set}
+        # Check if the missing skills file exists
+        if os.path.exists(missing_skills_output_path):
+            st.write("### Missing Skills by Sector")
 
-        # Initialize dictionary to store missing skills by sector
-        missing_skills_by_sector = {}
+            # Helper function to parse the missing skills file
+            def parse_missing_skills_file(file_path):
+                missing_skills_by_sector = {}
+                current_sector = None
+                current_skill_type = None
 
-        # Loop through top 10 job listings
-        for index, row in top_10_jobs.iterrows():
-            job_sector = row['sector']
+                with open(file_path, 'r') as file:
+                    for line in file:
+                        line = line.strip()
+                        if line.startswith("Sector:"):
+                            current_sector = line.split("Sector: ")[1].strip()
+                            missing_skills_by_sector[current_sector] = {
+                                'Required Skills': [],
+                                'Data Engineering': [],
+                                'Cloud Computing': [],
+                                'Soft Skills': []
+                            }
+                        elif line.startswith("Required Skills:"):
+                            current_skill_type = 'Required Skills'
+                            missing_skills_by_sector[current_sector]['Required Skills'] = line.split(": ")[1].strip().split(", ")
+                        elif line.startswith("Data Engineering:"):
+                            current_skill_type = 'Data Engineering'
+                            missing_skills_by_sector[current_sector]['Data Engineering'] = line.split(": ")[1].strip().split(", ")
+                        elif line.startswith("Cloud Computing:"):
+                            current_skill_type = 'Cloud Computing'
+                            missing_skills_by_sector[current_sector]['Cloud Computing'] = line.split(": ")[1].strip().split(", ")
+                        elif line.startswith("Soft Skills:"):
+                            current_skill_type = 'Soft Skills'
+                            missing_skills_by_sector[current_sector]['Soft Skills'] = line.split(": ")[1].strip().split(", ")
 
-            # Convert job skills into lowercase sets
-            required_skills = {skill.lower().strip() for skill in row['required skills'].split(',')}
-            data_engineering_skills = {skill.lower().strip() for skill in row['Data Engineering'].split(',')}
-            cloud_computing_skills = {skill.lower().strip() for skill in row['Cloud Computing'].split(',')}
-            soft_skills = {skill.lower().strip() for skill in row['Soft Skills'].split(',')}
+                return missing_skills_by_sector
 
-            # Initialize the sector in the dictionary if not present
-            if job_sector not in missing_skills_by_sector:
-                missing_skills_by_sector[job_sector] = {
+            # Parse the missing skills file
+            missing_skills_by_sector = parse_missing_skills_file(missing_skills_output_path)
+
+            # Get all sectors and add an "All Sectors" option
+            all_sectors = list(missing_skills_by_sector.keys())
+            all_sectors.append("All Sectors")
+
+            # Sector filter (drop-down menu)
+            selected_sector = st.selectbox("Select Sector to View Missing Skills:", all_sectors)
+
+            # Display missing skills immediately upon sector selection
+            if selected_sector != "All Sectors":
+                st.subheader(f"Missing Skills for Sector: {selected_sector}")
+
+                # Display missing skills for each category
+                for skill_type in ['Required Skills', 'Data Engineering', 'Cloud Computing', 'Soft Skills']:
+                    skills = missing_skills_by_sector[selected_sector][skill_type]
+                    with st.expander(skill_type, expanded=True):  # Set expanded to True
+                        if skills:
+                            st.write(", ".join(skills))
+                        else:
+                            st.write(f"All required {skill_type.lower()} are present.")
+
+            else:
+                st.write("### Common Skills Across All Sectors")
+
+                # Initialize sets to store common skills
+                common_skills = {
                     'Required Skills': set(),
                     'Data Engineering': set(),
                     'Cloud Computing': set(),
                     'Soft Skills': set()
                 }
 
-            # Compute missing skills correctly
-            required_missing = required_skills - cv_skills_set
-            data_eng_missing = data_engineering_skills - cv_skills_set
-            cloud_comp_missing = cloud_computing_skills - cv_skills_set
-            soft_skills_missing = soft_skills - cv_skills_set
+                # Iterate over each sector and accumulate skills into the common set
+                for sector, skills in missing_skills_by_sector.items():
+                    for skill_type, skill_list in skills.items():
+                        common_skills[skill_type].update(skill_list)
 
-            # Add missing skills to the corresponding sector category
-            missing_skills_by_sector[job_sector]['Required Skills'].update(required_missing)
-            missing_skills_by_sector[job_sector]['Data Engineering'].update(data_eng_missing)
-            missing_skills_by_sector[job_sector]['Cloud Computing'].update(cloud_comp_missing)
-            missing_skills_by_sector[job_sector]['Soft Skills'].update(soft_skills_missing)
+                # Display common skills across all sectors
+                for skill_type, skills in common_skills.items():
+                    with st.expander(f"{skill_type} (All Sectors)", expanded=True):  # Set expanded to True
+                        if skills:
+                            st.write(", ".join(skills))
+                        else:
+                            st.write(f"No missing {skill_type.lower()} across all sectors.")
 
-        # Save the missing skills data to a text file
-        with open(missing_skills_output_path, 'w') as f:
-            for sector, skill_types in missing_skills_by_sector.items():
-                f.write(f"Sector: {sector}\n")
-                for skill_type, missing_skills in skill_types.items():
-                    f.write(f"{skill_type}: {', '.join(missing_skills)}\n")
-                f.write("\n")
+            # Download button for the missing skills output file
+            with open(missing_skills_output_path, "r") as file:
+                st.download_button(
+                    label="Download Missing Skills File",
+                    data=file.read(),
+                    file_name="missing_skills_output.txt",
+                    mime="text/plain"
+                )
 
-        st.success(f"Missing skills saved to {missing_skills_output_path}")
+        else:
+            st.warning("No missing skills output file found. Please proceed from Tab 1 to generate the missing skills report.")
 
+        # Button to refresh (delete output file) at the bottom
+        st.markdown("---")  # Separator line for better UI
+        if st.button("Refresh"):
+            os.remove(output_file_path)
+            st.success("Output file deleted. Please proceed again from Tab 1.")
    
 
 
