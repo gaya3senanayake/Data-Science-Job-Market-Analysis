@@ -1465,8 +1465,14 @@ with tab3:
             else:
                 user_input = {
                     "project_experience": project_experience,
+                    "programming_lang": ', '.join(programming_lang),
+                    "database": ', '.join(database),
+                    "data_engineering": ', '.join(data_engineering),
+                    "cloud_computing": ', '.join(cloud_computing),
+                    "language_skills": ', '.join(language_skill),
                     "soft_skills": ', '.join(selected_soft_skills),
                     "experience_level": experience_level,
+                    "education_level": education_level,
                     "work_arrangement": ', '.join(work_arrangement),
                     "work_sector": ', '.join(work_sector),
                     "work_type": ', '.join(work_type),
@@ -1474,7 +1480,7 @@ with tab3:
                     "company_level": ', '.join(company_level)
                 }
                 # Save input to a CSV file
-                input_df = pd.DataFrame([user_input])
+                input_df = pd.DataFrame([input_file_path])
                 input_df.to_csv(input_file_path, index=False)
                 st.success("Preferences saved successfully!")
 
@@ -1493,6 +1499,7 @@ with tab3:
 
                 # Read the input file to use as cv_input
                 input_df = pd.read_csv(input_file_path)
+                
                 cv_input = {
                     'project_description': input_df['project_experience'][0],
                     'soft_skills': input_df['soft_skills'][0],
@@ -1500,7 +1507,14 @@ with tab3:
                     'contractType': input_df['contract_type'][0],
                     'work_arrangement': input_df['work_arrangement'][0],
                     'sector': input_df['work_sector'][0],
-                    'workType': input_df['work_type'][0]
+                    'workType': input_df['work_type'][0],
+                    'company_level': input_df['company_level'][0],
+                    'programming_lang': input_df['programming_lang'][0],
+                    'database': input_df['database'][0],
+                    'data_engineering': input_df['data_engineering'][0],
+                    'cloud_computing': input_df['cloud_computing'][0],
+                    'education_level': input_df['education_level'][0],
+                    'language_skills': input_df['language_skill'][0]
                 }
 
                 # Processing logic for CV input
@@ -1510,7 +1524,15 @@ with tab3:
                     cv_input['experienceLevel'] + ' ' +
                     cv_input['contractType'] + ' ' +
                     cv_input['work_arrangement'] + ' ' +
-                    cv_input['workType']
+                    cv_input['sector'] + ' ' +
+                    cv_input['workType'] + ' ' +
+                    cv_input['company_level'] + ' ' +
+                    cv_input['programming_lang'] + ' ' +
+                    cv_input['database'] + ' ' +
+                    cv_input['data_engineering'] + ' ' +
+                    cv_input['cloud_computing'] + ' ' +
+                    cv_input['education_level'] + ' ' +
+                    cv_input['language_skills']
                 ).lower()
 
                 cv_skills_set = set(skill.strip().lower() for skill in cv_input['soft_skills'].split(', '))
