@@ -1766,7 +1766,7 @@ with tab3:
             # Download button for the missing skills output file
             with open(missing_skills_output_path, "r") as file:
                 st.download_button(
-                    label="Download Missing Skills File",
+                    label="Download Required Skills File",
                     data=file.read(),
                     file_name="Required_skills_output.txt",
                     mime="text/plain"
