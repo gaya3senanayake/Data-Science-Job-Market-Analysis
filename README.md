@@ -22,13 +22,13 @@ This project is a **data-driven job recommendation system** that helps data scie
 - **Pandas & NumPy** – Data cleaning and analysis  
 - **Scikit-learn & NLP Techniques** – Job matching using **TF-IDF vectorization & cosine similarity**  
 - **Streamlit** – Interactive UI for job visualization and recommendations  
-- **Matplotlib & Seaborn** – Data visualization for hiring trends  
+- **Plotly,Matplotlib & Seaborn** – Data visualization for market trends  
 
 ## **How It Works**  
 
-1. **Scraping Data** – The system collects job postings from **LinkedIn** in real-time, extracting relevant fields such as job title, company, required skills, and location.  
+1. **Scraping Data** – The system collects job postings from **LinkedIn** , extracting relevant fields such as job title, company, required skills, and location.  
 2. **Exploratory Data Analysis (EDA)** – Analyzes the demand for different skills, trends in job postings, and insights into the **Helsinki data science job market**.  
-3. **Job Recommendation Engine** – Uses **Natural Language Processing (NLP)** to compare job descriptions with a user’s skill set, ranking jobs based on relevance.  
+3. **Job Recommendation Engine** – Uses **Natural Language Processing (NLP) techniques, TF-IDF vectorization and cosine similarity** to compare job descriptions with a user’s skill set, ranking jobs based on relevance.  
 4. **Streamlit Web App** – Provides an intuitive dashboard where users can explore trends and receive job recommendations tailored to their profiles.  
 
 ## **Future Enhancements**  
