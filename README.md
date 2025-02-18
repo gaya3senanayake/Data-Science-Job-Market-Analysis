@@ -10,7 +10,7 @@ This project is a **data-driven job recommendation system** that helps data scie
 
 ## **Key Features**  
 
-✅ **Job Data Collection** – Scrapes LinkedIn job postings for **real-time market trends** and hiring patterns.  
+✅ **Job Data Collection** – Scrapes LinkedIn job postings for **Data science jobs market trends** and hiring patterns.  
 ✅ **Exploratory Data Analysis (EDA)** – Analyzes job descriptions to identify **in-demand skills**, required experience levels, and industry trends.  
 ✅ **Skill-Based Job Recommendation System** – Uses **TF-IDF vectorization** and **cosine similarity** to match job descriptions with an applicant’s skills and experience.  
 ✅ **Interactive Dashboard** – Built with **Streamlit**, allowing users to filter and explore job postings, skill trends, and salary insights.  
