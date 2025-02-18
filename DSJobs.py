@@ -1463,23 +1463,18 @@ with tab3:
             if not project_experience or not selected_soft_skills or not experience_level or not work_arrangement or not work_sector:
                 st.error("Please fill in all fields before saving!")
             else:
-                cv_input = {
-                        'project_description': input_df['project_experience'][0],
-                        'soft_skills': input_df['soft_skills'][0],
-                        'experienceLevel': input_df['experience_level'][0],
-                        'contractType': input_df['contract_type'][0],
-                        'work_arrangement': input_df['work_arrangement'][0],
-                        'sector': input_df['work_sector'][0],
-                        'workType': input_df['work_type'][0],
-                        'company_level': input_df['company_level'][0],
-                        'programming_lang': ', '.join(programming_lang),
-                        'database': ', '.join(database),
-                        'data_engineering': ', '.join(data_engineering),
-                        'cloud_computing': ', '.join(cloud_computing),
-                        'education_level': education_level,
-                        'language_skills': ', '.join(language_skill)}
+                user_input = {
+                    "project_experience": project_experience,
+                    "soft_skills": ', '.join(selected_soft_skills),
+                    "experience_level": experience_level,
+                    "work_arrangement": ', '.join(work_arrangement),
+                    "work_sector": ', '.join(work_sector),
+                    "work_type": ', '.join(work_type),
+                    "contract_type": ', '.join(contract_type),
+                    "company_level": ', '.join(company_level)
+                }
                 # Save input to a CSV file
-                input_df = pd.DataFrame([input_file_path])
+                input_df = pd.DataFrame([user_input])
                 input_df.to_csv(input_file_path, index=False)
                 st.success("Preferences saved successfully!")
 
@@ -1499,37 +1494,24 @@ with tab3:
                 # Read the input file to use as cv_input
                 input_df = pd.read_csv(input_file_path)
                 cv_input = {
-                            'project_description': input_df['project_experience'][0],
-                            'soft_skills': input_df['soft_skills'][0],
-                            'experienceLevel': input_df['experience_level'][0],
-                            'contractType': input_df['contract_type'][0],
-                            'work_arrangement': input_df['work_arrangement'][0],
-                            'sector': input_df['work_sector'][0],
-                            'workType': input_df['work_type'][0],
-                            'company_level': input_df['company_level'][0],
-                            'programming_lang': ', '.join(programming_lang),
-                            'database': ', '.join(database),
-                            'data_engineering': ', '.join(data_engineering),
-                            'cloud_computing': ', '.join(cloud_computing),
-                            'education_level': education_level,
-                            'language_skills': ', '.join(language_skill)}
+                    'project_description': input_df['project_experience'][0],
+                    'soft_skills': input_df['soft_skills'][0],
+                    'experienceLevel': input_df['experience_level'][0],
+                    'contractType': input_df['contract_type'][0],
+                    'work_arrangement': input_df['work_arrangement'][0],
+                    'sector': input_df['work_sector'][0],
+                    'workType': input_df['work_type'][0]
+                }
 
                 # Processing logic for CV input
                 cv_combined_input = (
-                            cv_input['project_description'] + ' ' +
-                            cv_input['soft_skills'] + ' ' +
-                            cv_input['experienceLevel'] + ' ' +
-                            cv_input['contractType'] + ' ' +
-                            cv_input['work_arrangement'] + ' ' +
-                            cv_input['sector'] + ' ' +
-                            cv_input['workType'] + ' ' +
-                            cv_input['company_level'] + ' ' +
-                            cv_input['programming_lang'] + ' ' +
-                            cv_input['database'] + ' ' +
-                            cv_input['data_engineering'] + ' ' +
-                            cv_input['cloud_computing'] + ' ' +
-                            cv_input['education_level'] + ' ' +
-                            cv_input['language_skills']).lower()
+                    cv_input['project_description'] + ' ' +
+                    cv_input['soft_skills'] + ' ' +
+                    cv_input['experienceLevel'] + ' ' +
+                    cv_input['contractType'] + ' ' +
+                    cv_input['work_arrangement'] + ' ' +
+                    cv_input['workType']
+                ).lower()
 
                 cv_skills_set = set(skill.strip().lower() for skill in cv_input['soft_skills'].split(', '))
 
