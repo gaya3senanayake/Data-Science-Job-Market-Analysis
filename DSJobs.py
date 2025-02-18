@@ -1570,7 +1570,7 @@ with tab3:
                     ################ Updated Missing Skills by Sector ################
                     # Suggest missing skills classified by sector
                     missing_skills_by_sector = {}
-                    cv_skills_set = {skill.lower().strip() for skill in cv_skills_set}
+                    cv_skills_set = {skill.lower().strip() for skill in cv_skills_set.split(',')}
 
                     for index, row in top_10_jobs.iterrows():
                         # Extract the required skills and categorize them
